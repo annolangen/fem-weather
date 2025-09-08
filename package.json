@@ -1,0 +1,24 @@
+{
+  "name": "fem-weather",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "format": "prettier --write \"*.{ts,html,css,json}\"",
+    "clean": "rm -rf dist",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.13",
+    "lit-html": "^3.3.1",
+    "tailwindcss": "^4.1.13"
+  }
+}
