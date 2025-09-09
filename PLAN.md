@@ -7,11 +7,11 @@ This document outlines the steps to build the Frontend Mentor Weather App challe
 **Goal:** Configure the project, set up the basic file structure, and integrate the style guide.
 
 - **Tasks:**
-  - [ ] **Review `package.json`**: Familiarize yourself with the available scripts (`dev`, `build`, `format`).
-  - [ ] **Configure Tailwind CSS**: Open `src/style.css` and add a `@theme` block with the custom colors and fonts specified in `weather-app-main/style-guide.md`. This is the Tailwind v4 way of extending the theme.
-  - [ ] **Refine `src/main.ts`**: Keep the `renderBody` function. Remove the placeholder `weatherHtml` and the `window.onclick` event handlers, as re-rendering will be handled by a state subscription.
-  - [ ] **Create the Main App Template**: Create a new file `src/app.ts`. This will export a single function, e.g., `appTemplate`, that takes the entire application state and returns a `lit-html` `TemplateResult`.
-  - [ ] **Template Scaffolding**: Create placeholder files for the other UI parts inside a new `src/ui/` directory. These will export template functions, not components.
+  - [x] **Review `package.json`**: Familiarize yourself with the available scripts (`dev`, `build`, `format`).
+  - [x] **Configure Tailwind CSS**: Open `src/style.css` and add a `@theme` block with the custom colors and fonts specified in `weather-app-main/style-guide.md`. This is the Tailwind v4 way of extending the theme.
+  - [x] **Refine `src/main.ts`**: Keep the `renderBody` function. Remove the placeholder `weatherHtml` and the `window.onclick` event handlers, as re-rendering will be handled by a state subscription.
+  - [x] **Create the Main App Template**: Create a new file `src/app.ts`. This will export a single function, e.g., `appTemplate`, that takes the entire application state and returns a `lit-html` `TemplateResult`.
+  - [x] **Template Scaffolding**: Create placeholder files for the other UI parts inside a new `src/ui/` directory. These will export template functions, not components.
     - `src/ui/search-bar.ts`
     - `src/ui/current-weather.ts`
     - `src/ui/daily-forecast.ts`
@@ -29,10 +29,10 @@ This document outlines the steps to build the Frontend Mentor Weather App challe
 **Goal:** Create a dedicated module for interacting with the Open-Meteo API. This keeps API logic separate from UI and state logic.
 
 - **Tasks:**
-  - [ ] **Create API Service**: Create a new file `src/services/api.ts`.
-  - [ ] **Geocoding Function**: Implement a function to get latitude and longitude from a city name. Open-Meteo provides a geocoding API for this: `https://geocoding-api.open-meteo.com/`.
-  - [ ] **Weather Fetch Function**: Implement a function to fetch weather data from the main forecast API: `https://api.open-meteo.com/v1/forecast`. This function should accept latitude, longitude, and unit preferences as parameters.
-  - [ ] **Define Data Types**: Create TypeScript interfaces for the API responses (e.g., `GeocodingResponse`, `WeatherResponse`) to ensure type safety throughout the application.
+  - [x] **Create API Service**: Create a new file `src/services/api.ts`.
+  - [x] **Geocoding Function**: Implement a function to get latitude and longitude from a city name. Open-Meteo provides a geocoding API for this: `https://geocoding-api.open-meteo.com/`.
+  - [x] **Weather Fetch Function**: Implement a function to fetch weather data from the main forecast API: `https://api.open-meteo.com/v1/forecast`. This function should accept latitude, longitude, and unit preferences as parameters.
+  - [x] **Define Data Types**: Create TypeScript interfaces for the API responses (e.g., `GeocodingResponse`, `WeatherResponse`) to ensure type safety throughout the application.
 
 **Verification:**
 
