@@ -1,24 +1,29 @@
-import { getGeocoding, getWeather } from "./services/api";
-
-async function testApi() {
-  const geo = await getGeocoding("London");
-  console.log(geo);
-  if (geo && geo.results.length > 0) {
-    const { latitude, longitude } = geo.results[0];
-    const weather = await getWeather(latitude, longitude);
-    console.log(weather);
-  }
-}
-
-testApi();
-
 import "./style.css";
 import { render } from "lit-html";
 import { appTemplate } from "./app";
+import { store, actions } from "./store";
 
 function renderBody() {
   document.body.className = "bg-neutral-800 text-neutral-0 font-sans";
-  render(appTemplate(), document.body);
+  const state = store.getState();
+  render(appTemplate(state), document.body);
 }
 
+// Initial render
 renderBody();
+
+// Subscribe to state changes
+store.subscribe(renderBody);
+
+// Initial data load
+actions.fetchWeatherForLocation("London");
+
+// --- For debugging purposes ---
+declare global {
+  interface Window {
+    store: typeof store;
+    actions: typeof actions;
+  }
+}
+window.store = store;
+window.actions = actions;
