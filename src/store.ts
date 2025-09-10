@@ -75,7 +75,11 @@ export const actions = {
     try {
       console.log(`Fetching weather for ${locationName}... (real)`);
       const geocodingData = await getGeocoding(locationName);
-      if (!geocodingData || !geocodingData.results || geocodingData.results.length === 0) {
+      if (
+        !geocodingData ||
+        !geocodingData.results ||
+        geocodingData.results.length === 0
+      ) {
         throw new Error(`Could not find location: ${locationName}`);
       }
 
@@ -92,8 +96,14 @@ export const actions = {
 
       setState({ location, weather: weatherData, isLoading: false });
     } catch (err) {
-      const message = err instanceof Error ? err.message : "An unknown error occurred";
-      setState({ error: message, isLoading: false, location: null, weather: null });
+      const message =
+        err instanceof Error ? err.message : "An unknown error occurred";
+      setState({
+        error: message,
+        isLoading: false,
+        location: null,
+        weather: null,
+      });
     }
   },
 

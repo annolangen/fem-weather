@@ -53,6 +53,7 @@ export interface WeatherData {
     precipitation: number;
     weatherCode: number;
     windSpeed10m: number;
+    humidity: number;
   };
   hourly: {
     time: Date[];
@@ -80,7 +81,7 @@ export async function getWeather(
     latitude,
     longitude,
     current:
-      "temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m",
+      "temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,relative_humidity_2m",
     hourly: "temperature_2m,weather_code",
     daily: "weather_code,temperature_2m_max,temperature_2m_min",
     timezone: "auto",
@@ -111,6 +112,7 @@ export async function getWeather(
         precipitation: current.variables(2)?.value() ?? NaN,
         weatherCode: current.variables(3)?.value() ?? NaN,
         windSpeed10m: current.variables(4)?.value() ?? NaN,
+        humidity: current.variables(5)?.value() ?? NaN,
       },
       hourly: {
         time: range(

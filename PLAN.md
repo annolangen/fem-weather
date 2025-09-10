@@ -77,70 +77,35 @@ This document outlines the steps to build the Frontend Mentor Weather App challe
 - A loading indicator should be briefly visible during the fetch.
 - Intentionally making a bad API call (e.g., searching for a nonsense city) should populate the `error` state and display an error message.
 
-## 5. Building UI Template Functions
+## 5. Build, Style, and Compose UI Components
 
-**Goal:** Create the individual template functions for each part of the UI. These functions will receive state and actions as arguments.
+**Goal:** Create, style, and compose the individual UI components into the main application template, matching the provided design files.
 
 - **Tasks:**
-  - [ ] **Search Bar (`ui/search-bar.ts`):**
-    - Create a template function that accepts an `onSearch` action as an argument.
-    - Use `lit-html`'s `@submit` directive on the form to call the action.
-  - [ ] **Current Weather (`ui/current-weather.ts`):**
-    - Create a a template that displays data from `state.weather.current` and `state.location`.
-  - [ ] **Daily Forecast (`ui/daily-forecast.ts`):**
-    - Create a template that renders a list of 7 days from `state.weather.daily`.
-    - Use `@click` on each day element to call the `setSelectedDay` action with the day's index.
-  - [ ] **Hourly Forecast (`ui/hourly-forecast.ts`):**
-    - Create a template that renders the hourly forecast from `state.weather.hourly` for the `state.selectedDayIndex`.
-  - [ ] **Unit Switcher (`ui/unit-switcher.ts`):**
-    - Create a template that calls the `changeUnits` action.
+  - [x] **Build and Style Components**: Create and style the individual UI templates (`search-bar.ts`, `current-weather.ts`, `daily-forecast.ts`, `hourly-forecast.ts`, `unit-switcher.ts`).
+  - [x] **Compose Main Template**: In `src/app.ts`, import and use all the UI template functions to build the full application UI.
+  - [x] **Pass State and Actions**: Ensure the main `appTemplate` passes the global `state` and `actions` down to the child template functions as needed.
 
 **Verification:**
 
-- Each template function can be tested in isolation by calling it from `app.ts` with mock data (using the `#mock` flag).
-- The rendered output should contain the correct HTML structure and display the mock data.
-- The page should look like a basic, unstyled version of the final design, with all data points present.
+- The application UI should be fully composed and functional.
+- The components should closely match the `mobile-design-metric.jpg` design.
+- The components should correctly display data from the mock state (using the `#mock` flag).
+- All interactive elements (search, day selection, unit switching) should be wired up and working correctly.
 
-## 6. Connecting UI, State, and Actions
+## 6. Finalization
 
-**Goal:** Wire up the UI event handlers to call the appropriate store actions, triggering automatic re-renders.
-
-- **Tasks:**
-  - [ ] **Compose the Main Template**: In `src/app.ts`, import and use the UI template functions (`searchBarTemplate`, `currentWeatherTemplate`, etc.) to build the full application UI.
-  - [ ] **Pass State and Actions to UI**: The `appTemplate` will pass the global `state` and `actions` down to the child template functions that need them.
-
-**Verification:**
-
-- Searching for a city updates the entire UI with the new location's weather data.
-- Clicking a day in the "Daily Forecast" section updates the "Hourly Forecast" section to show data for that day.
-- Changing units in the "Unit Switcher" re-fetches data and updates all temperature, wind speed, and precipitation values across the app.
-- The application is fully interactive and functional.
-
-## 7. Styling and Responsiveness
-
-**Goal:** Apply styles using Tailwind CSS to match the design and ensure the layout is responsive.
+**Goal:** Add final touches, handle responsiveness, and prepare the project for submission.
 
 - **Tasks:**
-  - [ ] Style each UI part using utility classes based on the provided designs.
-  - [ ] Use Tailwind's responsive prefixes (e.g., `md:`, `lg:`) to adapt the layout for mobile and desktop screens.
-  - [ ] Implement all hover and focus states for interactive elements.
-
-**Verification:**
-
-- The final UI should be a pixel-perfect match of the `preview.jpg` design for both mobile and desktop views.
-- All interactive elements (buttons, inputs, forecast items) must have clear `hover` and `focus` states.
-- The layout should adapt smoothly when the browser window is resized.
-
-## 8. Finalization
-
-**Goal:** Add final touches, perform final checks, and prepare the project for submission.
-
-- **Tasks:**
+  - [x] **Responsiveness**: Use Tailwind's responsive prefixes (e.g., `md:`, `lg:`) to adapt the layout for desktop screens, matching the desktop design files.
   - [ ] **Accessibility**: Review the app for accessibility best practices (semantic HTML, keyboard navigation, ARIA attributes).
-  - [ ] **README**: Fill out the `README-template.md` with details about your process.
+  - [ ] **README**: Fill out the `README-template.md`.
   - [ ] **Deploy**: Deploy the final site to a public URL.
 
 **Verification:**
 
+- The UI should be a pixel-perfect match of both the mobile and desktop designs.
+- The layout should adapt smoothly when the browser window is resized.
 - The application is fully accessible via keyboard navigation.
 - The deployed application at the public URL works as expected.

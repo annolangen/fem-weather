@@ -4,9 +4,9 @@ import { appTemplate } from "./app";
 import { store, actions } from "./store";
 
 function renderBody() {
-  document.body.className = "bg-neutral-800 text-neutral-0 font-sans";
+  document.body.className = "bg-neutral-900 text-neutral-0 font-sans";
   const state = store.getState();
-  render(appTemplate(state), document.body);
+  render(appTemplate({ state, actions }), document.body);
 }
 
 // Initial render

@@ -25,6 +25,7 @@ export const mockWeatherData: WeatherData = {
     precipitation: 0.1,
     weatherCode: 3,
     windSpeed10m: 10.0,
+    humidity: 70,
   },
   hourly: {
     time: Array.from({ length: 24 }, (_, i) => {
