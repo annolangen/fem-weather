@@ -61,21 +61,19 @@ export function hourlyForecastHtml({ state, actions }: HourlyForecastProps) {
         ${dayHourlyTime.map(
           (date, i) => html`
             <div
-              class="flex items-center justify-between rounded-lg bg-neutral-700 px-4 text-white"
+              class="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 rounded-lg bg-neutral-700 px-4 text-white"
             >
-              <span>
-                <img
-                  src="${baseUrl}assets/images/${getWeatherInfo(
-                    dayHourlyWeatherCode[i]
-                  ).icon}"
-                  alt="${getWeatherInfo(dayHourlyWeatherCode[i]).description}"
-                  class="inline h-10 w-10"
-                />
-                <span class="text-sm text-neutral-400"
-                  >${formatHour(date)}</span
-                >
-              </span>
-              <p>${dayHourlyTemp[i].toFixed(0)}${tempUnit}</p>
+              <img
+                src="${baseUrl}assets/images/${getWeatherInfo(
+                  dayHourlyWeatherCode[i]
+                ).icon}"
+                alt="${getWeatherInfo(dayHourlyWeatherCode[i]).description}"
+                class="h-10 w-10"
+              />
+              <span class="text-sm text-neutral-400">${formatHour(date)}</span>
+              <p class="font-medium">
+                ${dayHourlyTemp[i].toFixed(0)}${tempUnit}
+              </p>
             </div>
           `
         )}
