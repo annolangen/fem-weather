@@ -29,6 +29,8 @@ export function hourlyForecastHtml({ state, actions }: HourlyForecastProps) {
   const dayHourlyTemp = hourly.temperature2m.slice(startIndex, endIndex);
   const dayHourlyWeatherCode = hourly.weatherCode.slice(startIndex, endIndex);
 
+  const baseUrl = import.meta.env.BASE_URL;
+
   const formatHour = (date: Date) =>
     date.toLocaleTimeString(undefined, {
       hour: "numeric",
@@ -63,7 +65,7 @@ export function hourlyForecastHtml({ state, actions }: HourlyForecastProps) {
             >
               <span>
                 <img
-                  src="/weather-app-main/assets/images/${getWeatherInfo(
+                  src="${baseUrl}assets/images/${getWeatherInfo(
                     dayHourlyWeatherCode[i]
                   ).icon}"
                   alt="${getWeatherInfo(dayHourlyWeatherCode[i]).description}"

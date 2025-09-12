@@ -16,6 +16,8 @@ export function dailyForecastHtml({ state, actions }: DailyForecastProps) {
   const getDayOfWeek = (date: Date) =>
     date.toLocaleDateString(undefined, { weekday: "short" });
 
+  const baseUrl = import.meta.env.BASE_URL;
+
   return html`
     <div class="mt-8 rounded-lg bg-neutral-800 p-4">
       <h3 class="mb-4 text-lg font-bold text-white">Daily Forecast</h3>
@@ -33,7 +35,7 @@ export function dailyForecastHtml({ state, actions }: DailyForecastProps) {
             >
               <span class="mb-2 text-lg font-bold">${getDayOfWeek(date)}</span>
               <img
-                src="/weather-app-main/assets/images/${getWeatherInfo(
+                src="${baseUrl}assets/images/${getWeatherInfo(
                   daily.weatherCode[index]
                 ).icon}"
                 alt="${getWeatherInfo(daily.weatherCode[index]).description}"

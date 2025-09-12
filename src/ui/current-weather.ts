@@ -20,13 +20,15 @@ export function currentWeatherHtml(state: AppState) {
     day: "numeric",
   });
 
+  const baseUrl = import.meta.env.BASE_URL;
+
   return html`
     <h1 class="mb-8 text-4xl font-bold text-white">
       How's the sky looking today?
     </h1>
     <div
       class="rounded-lg bg-neutral-800 p-6 text-white"
-      style="background-image: url('/weather-app-main/assets/images/bg-today-small.svg'); background-size: cover; background-position: center;"
+      style="background-image: url('${baseUrl}assets/images/bg-today-small.svg'); background-size: cover; background-position: center;"
     >
       <div class="mb-4 flex items-center justify-between">
         <div>
@@ -34,7 +36,7 @@ export function currentWeatherHtml(state: AppState) {
           <p class="text-neutral-400">${today}</p>
         </div>
         <img
-          src="/weather-app-main/assets/images/${weatherInfo.icon}"
+          src="${baseUrl}assets/images/${weatherInfo.icon}"
           alt="${weatherInfo.description}"
           class="h-24 w-24"
         />

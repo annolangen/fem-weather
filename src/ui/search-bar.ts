@@ -5,11 +5,13 @@ type SearchBarProps = {
 };
 
 export function searchBarHtml({ onSearch }: SearchBarProps) {
+  const baseUrl = import.meta.env.BASE_URL;
+
   return html`
     <form @submit=${handleSearch} class="flex flex-col gap-4">
       <div class="relative flex items-center">
         <img
-          src="/weather-app-main/assets/images/icon-search.svg"
+          src="${baseUrl}assets/images/icon-search.svg"
           alt=""
           class="absolute left-4"
         />
