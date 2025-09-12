@@ -1,8 +1,8 @@
-import { html, type TemplateResult } from "lit-html";
+import { html } from "lit-html";
 import type { AppState } from "../store";
 import { getWeatherInfo } from "../utils/weather";
 
-export function currentWeatherTemplate(state: AppState): TemplateResult {
+export function currentWeatherHtml(state: AppState) {
   if (!state.weather || !state.location) {
     return html``;
   }

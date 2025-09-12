@@ -44,82 +44,66 @@ function setState(newState: Partial<AppState>) {
 
 // --- ACTIONS ---
 
-export const actions = {
-  fetchWeatherForLocation: async (locationName: string) => {
-    setState({ isLoading: true, error: null });
+async function fetchWeatherForLocation(locationName: string) {
+  if (window.location.hash === "#mock") {
+    setState({
+      location: mockGeocodingResult,
+      weather: mockWeatherData,
+      isLoading: false,
+    });
+    return;
+  }
 
-    const useMockData = window.location.hash === "#mock";
-
-    if (useMockData) {
-      console.log(`Fetching weather for ${locationName}... (mock)`);
-      setTimeout(() => {
-        if (locationName.toLowerCase() === "london") {
-          setState({
-            location: mockGeocodingResult,
-            weather: mockWeatherData,
-            isLoading: false,
-          });
-        } else {
-          setState({
-            error: `Could not find location: ${locationName}`,
-            isLoading: false,
-            location: null,
-            weather: null,
-          });
-        }
-      }, 500);
-      return;
+  setState({ isLoading: true, error: null });
+  try {
+    console.log(`Fetching weather for ${locationName}... `);
+    const geocodingData = await getGeocoding(locationName);
+    if (
+      !geocodingData ||
+      !geocodingData.results ||
+      geocodingData.results.length === 0
+    ) {
+      throw new Error(`Could not find location: ${locationName}`);
     }
 
-    // Real API logic
-    try {
-      console.log(`Fetching weather for ${locationName}... (real)`);
-      const geocodingData = await getGeocoding(locationName);
-      if (
-        !geocodingData ||
-        !geocodingData.results ||
-        geocodingData.results.length === 0
-      ) {
-        throw new Error(`Could not find location: ${locationName}`);
-      }
+    const location = geocodingData.results[0];
+    const weatherData = await getWeather(
+      location.latitude,
+      location.longitude,
+      state.units
+    );
 
-      const location = geocodingData.results[0];
-      const weatherData = await getWeather(
-        location.latitude,
-        location.longitude,
-        state.units
-      );
-
-      if (!weatherData) {
-        throw new Error("Failed to fetch weather data.");
-      }
-
-      setState({ location, weather: weatherData, isLoading: false });
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "An unknown error occurred";
-      setState({
-        error: message,
-        isLoading: false,
-        location: null,
-        weather: null,
-      });
+    if (!weatherData) {
+      throw new Error("Failed to fetch weather data.");
     }
-  },
 
-  setSelectedDay: (index: number) => {
-    if (index >= 0 && index < (state.weather?.daily?.time?.length ?? 0)) {
-      setState({ selectedDayIndex: index });
-    }
-  },
+    setState({ location, weather: weatherData, isLoading: false });
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : "An unknown error occurred";
+    setState({
+      error: message,
+      isLoading: false,
+      location: null,
+      weather: null,
+    });
+  }
+}
 
-  changeUnits: (newUnits: Units) => {
-    setState({ units: newUnits });
-    if (state.location) {
-      actions.fetchWeatherForLocation(state.location.name);
-    }
-  },
-};
+function setSelectedDay(index: number) {
+  if (index >= 0 && index < (state.weather?.daily?.time?.length ?? 0)) {
+    setState({ selectedDayIndex: index });
+  }
+}
+
+function changeUnits(newUnits: Units) {
+  setState({ units: newUnits });
+  if (state.location) {
+    fetchWeatherForLocation(state.location.name);
+  }
+}
+
+export const actions = { fetchWeatherForLocation, setSelectedDay, changeUnits };
 
 // --- STORE EXPORT ---
 

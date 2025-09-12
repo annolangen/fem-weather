@@ -1,4 +1,4 @@
-import { html, type TemplateResult } from "lit-html";
+import { html } from "lit-html";
 import type { AppState, actions } from "../store";
 
 type UnitSwitcherProps = {
@@ -6,15 +6,7 @@ type UnitSwitcherProps = {
   actions: typeof actions;
 };
 
-export function unitSwitcherTemplate({
-  state,
-  actions,
-}: UnitSwitcherProps): TemplateResult {
-  const handleUnitChange = (event: Event) => {
-    const selectElement = event.target as HTMLSelectElement;
-    actions.changeUnits(selectElement.value as "metric" | "imperial");
-  };
-
+export function unitSwitcherHtml({ state, actions }: UnitSwitcherProps) {
   return html`
     <div class="flex items-center gap-2">
       <label for="unit-select" class="text-neutral-400">Units</label>
@@ -30,4 +22,9 @@ export function unitSwitcherTemplate({
       </select>
     </div>
   `;
+
+  function handleUnitChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    actions.changeUnits(selectElement.value as "metric" | "imperial");
+  }
 }

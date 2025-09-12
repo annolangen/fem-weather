@@ -1,10 +1,8 @@
-import { html, type TemplateResult } from "lit-html";
+import { html } from "lit-html";
 import type { AppState } from "../store";
 
-export function weatherDetailsTemplate(state: AppState): TemplateResult {
-  if (!state.weather) {
-    return html``;
-  }
+export function weatherDetailsHtml(state: AppState) {
+  if (!state.weather) return html``;
 
   const { weather, units } = state;
   const { current } = weather;

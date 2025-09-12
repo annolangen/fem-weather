@@ -1,23 +1,10 @@
-import { html, type TemplateResult } from "lit-html";
+import { html } from "lit-html";
 
 type SearchBarProps = {
   onSearch: (location: string) => void;
 };
 
-export function searchBarTemplate({
-  onSearch,
-}: SearchBarProps): TemplateResult {
-  const handleSearch = (event: SubmitEvent) => {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const searchInput = form.elements.namedItem("search") as HTMLInputElement;
-    const location = searchInput.value.trim();
-    if (location) {
-      onSearch(location);
-      form.reset();
-    }
-  };
-
+export function searchBarHtml({ onSearch }: SearchBarProps) {
   return html`
     <form @submit=${handleSearch} class="flex flex-col gap-4">
       <div class="relative flex items-center">
@@ -36,10 +23,21 @@ export function searchBarTemplate({
       </div>
       <button
         type="submit"
-        class="bg-blue-500 hover:bg-blue-700 focus:ring-blue-500 w-full rounded-full py-4 text-white focus:ring-2 focus:outline-none"
+        class="w-full rounded-full bg-blue-500 py-4 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
       >
         Search
       </button>
     </form>
   `;
+
+  function handleSearch(event: SubmitEvent) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const searchInput = form.elements.namedItem("search") as HTMLInputElement;
+    const location = searchInput.value.trim();
+    if (location) {
+      onSearch(location);
+      form.reset();
+    }
+  }
 }

@@ -1,6 +1,6 @@
-import { html, type TemplateResult } from "lit-html";
+import { html } from "lit-html";
 import { classMap } from "lit-html/directives/class-map.js";
-import type { AppState, actions } from "../store";
+import { type AppState, actions } from "../store";
 import { getWeatherInfo } from "../utils/weather";
 
 type DailyForecastProps = {
@@ -8,20 +8,13 @@ type DailyForecastProps = {
   actions: typeof actions;
 };
 
-export function dailyForecastTemplate({
-  state,
-  actions,
-}: DailyForecastProps): TemplateResult {
-  if (!state.weather) {
-    return html``;
-  }
+export function dailyForecastHtml({ state, actions }: DailyForecastProps) {
+  if (!state.weather) return html``;
 
   const { daily } = state.weather;
   const tempUnit = state.units === "metric" ? "°C" : "°F";
-
-  const getDayOfWeek = (date: Date) => {
-    return date.toLocaleDateString(undefined, { weekday: "short" });
-  };
+  const getDayOfWeek = (date: Date) =>
+    date.toLocaleDateString(undefined, { weekday: "short" });
 
   return html`
     <div class="mt-8 rounded-lg bg-neutral-800 p-4">
